@@ -1,0 +1,188 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+/**
+ * Servlet implementation class gradeServlet
+ */
+@WebServlet("/Insert")
+public class Insert extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Insert() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		PrintWriter out = res.getWriter();
+
+		res.setContentType("text/html");
+
+		int id = Integer.parseInt(req.getParameter("id"));
+		//read the form data
+		String name = req.getParameter("name");
+		
+		// gender
+		String gender = req.getParameter("gender");
+		
+		// courses
+		String courses = req.getParameter("sub");
+		
+		// score
+		int score = Integer.parseInt(req.getParameter("score"));
+		
+		String grade = "";
+		if(score >= 97 && score <= 100) {
+			grade = "A+";
+		} else if (score >= 93 && score < 97) {
+			grade = "A";
+		}
+		else if(score >= 90 && score < 93){
+			grade = "A-";
+			
+		}
+		else if(score >= 90 && score < 93){
+			grade = "A-";
+			
+		}
+		
+		else if(score >= 87 && score < 90){
+			grade = "B+";
+			
+		}
+		else if(score >= 83 && score < 87){
+			grade = "B";
+			
+		}
+		else if(score >= 80 && score < 83){
+			grade = "B-";
+			
+		}
+		else if(score >=77 && score <80) {
+			grade = "C+";
+		}
+		else if(score >=73 && score <77) {
+			grade = "C";
+		}
+		else if(score >=70 && score <73) {
+			grade = "C-";
+		}
+		else if(score >=67 && score <70) {
+			grade = "D+";
+		}
+		else if(score >=63 && score <67) {
+			grade = "D";
+		}
+		else if(score >=60 && score <63) {
+			grade = "D-";
+		}
+		else if(score >=0 && score <60) {
+			grade = "F";
+		}
+		
+		
+		try 
+		{
+			
+			String url = "jdbc:mysql://ec2-3-19-30-149.us-east-2.compute.amazonaws.com:3306/studentGradeSystem";
+			String userName = "fghafari_mysql_remote"; 
+			String password = "1qaz12345";
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(url, userName, password);
+			System.out.println("CONNECTION SUCCESS!");
+			System.out.println("URL:  " + url);
+			System.out.println("User: " + userName);
+			System.out.println("Pass: \n" + password);
+		
+			String query = "INSERT into studentGrade (id, name, gender, courses, score, grade) VALUES  (?, ?, ?, ?, ?, ?)";
+			PreparedStatement pstm = conn.prepareStatement(query);
+		
+			
+			pstm.setInt(1, id);
+			pstm.setString(2, name);
+			pstm.setString(3, gender);
+			pstm.setString(4, courses);
+			pstm.setInt(5, score);
+			pstm.setString(6, grade);
+			
+			pstm.execute();
+			
+			String show = "select * from studentGrade where id=?";
+			pstm = conn.prepareStatement(show);
+			pstm.setInt(1,  id);
+
+			
+			String title = "Inserted Data";
+			String docType = "<!doctype html public \"-//w3c//dtd html 4.0" + //
+			"trasitional//en\">\n"; //
+			out.println(docType + //
+					"<html>\n" + //
+					"<head><title>" + title + "</title></head>\n" + //
+					"<h1 align=\"center\">" + title + "</h1>\n");
+			
+			
+			out.print("<table width=75% border=1>");
+			ResultSet rs = pstm.executeQuery();
+			
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int totalColumn = rsmd.getColumnCount();
+			out.print("<tr>");
+			for (int i=1; i<=totalColumn; i++) {
+				out.print("<th>" + rsmd.getColumnName(i) + "</th>");
+			}
+			out.print("</tr>");
+			
+			
+			
+			while (rs.next()) {
+				id = rs.getInt("id");
+				name = rs.getString("name");
+				gender = rs.getString("gender");
+				courses = rs.getString("courses");
+				score = rs.getInt("score");
+				grade = rs.getString("grade");
+				out.print("<tr><td>" + id + "</td><td>" + name + "</td><td>" + gender + "</td><td>" + courses + "</td><td>" + score + "</td><td>" + grade + "</td></tr>");
+
+			}
+			out.print("</table>");
+			out.println("<a href=home.html>Home</a>");
+			out.println("</body></html>");
+			
+			conn.close();
+		
+	} catch (Exception e) 
+	{
+		e.printStackTrace();
+	}
+	
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
