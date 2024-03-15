@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="container-fluid">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-light">
+  <ul class="navbar-nav">
+  <a class="nav-link" href="home.html">Home</a> |
+    
+     <a class="nav-link text-center" href="register.html">Insert</a> |
+
+      <a class="nav-link" href="edit.html">Edit</a> |
+ 
+      <a class="nav-link" href="show">Show</a> 
+   
+      
+
+  </ul>
+</nav>
+	<div class="card" style="width:600px;margin:auto;margin-top:50px">
+	<h2 class="bg-danger text-light card-header">Delete Student Grade</h2>
+	<form class="form" action="delete" method="post">
+		<table class="table table-hover table-striped">
+			<tr>
+			<td>Id</td>
+			<td><input type="number" min=0 name="id">
+			</td>
+			</tr>
+	
+			<tr>
+			<td><button type="submit" class="btn btn-outline-success">Delete</button></td>
+			<td><button type="reset" class="btn btn-outline-danger">Reset</button></td>
+			</tr>
+			
+		</table>
+	</form>
+	</div>
+</body>
+</html>
