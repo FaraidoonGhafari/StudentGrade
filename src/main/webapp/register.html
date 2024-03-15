@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="container-fluid">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-light">
+  <ul class="navbar-nav">
+    
+     <a class="nav-link text-center" href="home.html">Home</a> |
+
+      <a class="nav-link" href="edit.html">Edit</a> |
+ 
+      <a class="nav-link" href="show">Show</a> |
+   
+      <a class="nav-link" href="delete.html">Delete</a>
+
+  </ul>
+</nav>
+	<div class="card" style="width:600px;margin:auto;margin-top:50px">
+	
+	<h2 class="bg-danger text-light card-header">Insert Student Grade</h2>
+	<form class="form" action="Insert" method="post">
+		<table class="table table-hover table-striped">
+			<tr>
+			<td>Id</td>
+			<td><input type="number" min=0 name="id">
+			</td>
+			</tr>
+			<tr>
+			<td>Name</td>
+			<td><input type="text" name="name">
+			</td>
+			</tr>
+			<tr>
+			<td>Gender</td>
+			<td>
+			<input type="radio" name="gender" value="male">Male
+			<input type="radio" name="gender" value="female">Female
+			</td>
+			</tr>
+			<tr>
+			<td>Courses</td>
+			<td>
+			<select name="sub">
+			<option value="" selected="selected">Select</option>
+			<option value="Calculus I">Calculus I</option>
+			<option value="Calculus II">Calculus II</option>
+			<option value="Intro to Comp Science I">Intro to Comp Science I</option>
+			<option value="Intro to Comp Science II">Intro to Comp Science II</option>
+			<option value="Intro to C Programming">Intro to C Programming</option>
+			<option value="Intro to SW Engineering">Intro to SW Engineering</option>
+			<option value="Operating Sytstems">Operating Sytstems</option>
+			</select>
+			</td>
+			</tr>
+			<tr>
+			<td>Score</td>
+			<td><input type="number" min=0 name="score"></td>
+			</tr>
+			
+			<tr>
+			<td><button type="submit" class="btn btn-outline-success">Submit</button></td>
+			<td><button type="reset" class="btn btn-outline-danger">Reset</button></td>
+			</tr>
+			
+		</table>
+	</form>
+	</div>
+	
+</body>
+</html>
